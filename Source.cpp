@@ -40,6 +40,7 @@ int main()
 	int max[4] = {};
 
 	short fillmethod = 0;
+	method:
 	cout << "Выберите способ заполнения матрицы (1-авто, 2-вручную): ";
 	cin >> fillmethod;
 	switch (fillmethod)
@@ -48,17 +49,31 @@ int main()
 	case 2: goto userfill;
 	default: {
 		interrupt("Указан некорректный способ заполнения матрицы.");
+		goto method;
 	}
 	}
 
 	autofill:
 #pragma region autofill matrix
-	for (int rows = 0; rows < 4; rows++)
+	for (int i = 0; i < 5; i++)
 	{
-		for (int cols = 0; cols < 5; cols++)
-		{
-			matrix[rows][cols] = randnum();
-		}
+		matrix[0][i] = randnum();
+		max[0] += matrix[0][i];
+	}
+	for (int i = 4; i > -1; i--)
+	{
+		matrix[1][i] = randnum();
+		max[1] += matrix[1][i];
+	}
+	for (int i = 0; i < 5; i++)
+	{
+		matrix[2][i] = randnum();
+		max[2] += matrix[2][i];
+	}
+	for (int i = 0; i < 5; i++)
+	{
+		matrix[3][i] = randnum();
+		max[3] += matrix[3][i];
 	}
 	goto show;
 #pragma endregion
