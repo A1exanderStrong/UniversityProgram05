@@ -17,18 +17,56 @@ static int indexOfMax(int* array, size_t arrayLength)
 	}
 	return index;
 }
+static void interrupt(const char* msg = "")
+{
+	cout << msg << endl;
+	system("pause");
+	system("cls");
+}
+
+static int randnum(int min = 0, int max = 60)
+{
+	return rand() % (max - min + 1) + min;
+}
 
 int main()
 {
 	setlocale(LC_ALL, "ru");
-
+	srand(time(0));
 	/*Заполните матрицу 4 x 5 змейкой: первая строка слева направо, вторая справа налево, третья снова слева направо.
 	Определите номер строки, содержащей наибольшую сумму элементов.
 	Поменяйте местами первую и последнюю строки матрицы M x N.*/
+	cout << "Введите размер матрицы в формате NxN (например 5x4): ";
+
+
 	int matrix[4][5] = {};
 	int max[4] = {};
 
-#pragma region fill matrix
+	short fillmethod = 0;
+	cout << "Выберите способ заполнения матрицы (1-авто, 2-вручную): ";
+	cin >> fillmethod;
+	switch (fillmethod)
+	{
+	case 1: goto autofill;
+	case 2: goto userfill;
+	default: {
+		interrupt("Указан некорректный способ заполнения матрицы.");
+	}
+	}
+
+	autofill:
+#pragma region autofill matrix
+	for (int rows = 0; rows < 4; rows++)
+	{
+		for (int cols = 0; cols < 5; cols++)
+		{
+			matrix[rows][cols] = randnum();
+		}
+	}
+	goto show;
+#pragma endregion
+	userfill:
+#pragma region fill matrix by user
 	cout << "Заполнение первой строки матрицы слева направо\n";
 	for (int i = 0; i < 5; i++)
 	{
@@ -57,8 +95,9 @@ int main()
 		cin >> matrix[3][i];
 		max[3] += matrix[3][i];
 	}
+	goto show;
 #pragma endregion
-
+	show:
 #pragma region show matrix
 	for (int row = 0; row < 4; row++)
 	{
