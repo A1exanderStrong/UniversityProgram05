@@ -55,57 +55,51 @@ int main()
 
 	autofill:
 #pragma region autofill matrix
-	for (int i = 0; i < 5; i++)
+	for (int row = 0; row < 4; row++)
 	{
-		matrix[0][i] = randnum();
-		max[0] += matrix[0][i];
-	}
-	for (int i = 4; i > -1; i--)
-	{
-		matrix[1][i] = randnum();
-		max[1] += matrix[1][i];
-	}
-	for (int i = 0; i < 5; i++)
-	{
-		matrix[2][i] = randnum();
-		max[2] += matrix[2][i];
-	}
-	for (int i = 0; i < 5; i++)
-	{
-		matrix[3][i] = randnum();
-		max[3] += matrix[3][i];
+		if (row == 1)
+		{
+			for (int col = 4; col > -1; col--)
+			{
+				matrix[row][col] = randnum();
+				max[row] += matrix[row][col];
+			}
+		}
+		else 
+		{
+			for (int col = 0; col < 5; col++)
+			{
+				matrix[row][col] = randnum();
+				max[row] += matrix[row][col];
+			}
+		}
+		
 	}
 	goto show;
 #pragma endregion
 	userfill:
 #pragma region fill matrix by user
-	cout << "Заполнение первой строки матрицы слева направо\n";
-	for (int i = 0; i < 5; i++)
+	for (int row = 0; row < 4; row++)
 	{
-		cout << "Введите элемент #" << i << ": ";
-		cin >> matrix[0][i];
-		max[0] += matrix[0][i];
-	}
-	cout << "Заполнение второй строки матрицы справа налево\n";
-	for (int i = 4; i > -1; i--)
-	{
-		cout << "Введите элемент #" << i << ": ";
-		cin >> matrix[1][i];
-		max[1] += matrix[1][i];
-	}
-	cout << "Заполнение третьей строки матрицы слева направо\n";
-	for (int i = 0; i < 5; i++)
-	{
-		cout << "Введите элемент #" << i << ": ";
-		cin >> matrix[2][i];
-		max[2] += matrix[2][i];
-	}
-	cout << "Заполнение четвёртой строки матрицы слева направо\n";
-	for (int i = 0; i < 5; i++)
-	{
-		cout << "Введите элемент #" << i << ": ";
-		cin >> matrix[3][i];
-		max[3] += matrix[3][i];
+		cout << "Заполните строку #" << row << endl;
+		if (row == 1)
+		{
+			for (int col = 4; col > -1; col--)
+			{
+				cout << "\tВведите элемент #" << col + 1 << ": ";
+				cin >> matrix[row][col];
+				max[row] += matrix[row][col];
+			}
+		}
+		else
+		{
+			for (int col = 0; col < 5; col++)
+			{
+				cout << "\tВведите элемент #" << col + 1 << ": ";
+				cin >> matrix[row][col];
+				max[row] += matrix[row][col];
+			}
+		}
 	}
 	goto show;
 #pragma endregion
